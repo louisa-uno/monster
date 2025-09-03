@@ -81,9 +81,10 @@ sunday = monday + timedelta(days = 6)
 date_range = f"{monday.day:02}.{monday.month:02}.{monday.year} - {sunday.day:02}.{sunday.month:02}.{sunday.year}"
 
 # Prepare messages
-discord_title = "Monster Energy Angebote"
+title = "Monster Energy Angebote diese Woche"
+discord_title = title
 discord_description = description + date_range
-misskey_description = "Monster Energy Angebote\n" + description + "<small>" + date_range + "</small>"
+misskey_description = title + "\n" + description + "<small>" + date_range + "</small>"
 
 try:
     # Send to Discord
