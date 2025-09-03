@@ -1,0 +1,46 @@
+name: Post to Discord and Misskey
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+    workflow_dispatch:
+    schedule:
+        - cron: "0 4 * * 1" # At german time 5:00/6:00 every Monday
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+
+            - name: Set up Python 3.13
+              uses: actions/setup-python@v4
+              with:
+                  python-version: "3.13"
+
+            - name: Cache pip dependencies
+              uses: actions/cache@v3
+              with:
+                  path: ~/.cache/pip
+                  key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pip-
+
+            - name: Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  pip install -r requirements.txt
+
+            - name: Run create-posts.py with secrets
+              if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/force-post')
+              env:
+                  DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+                  MISSKEY_TOKEN: ${{ secrets.MISSKEY_TOKEN }}
+              run: python create-posts.py
+
+            - name: Run create-posts.py without secrets
+              if: (!(github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/force-post'))
+              run: python create-posts.py

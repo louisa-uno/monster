@@ -1,0 +1,5 @@
+requests==2.32.4
+lxml==6.0.1
+discord-webhook==1.4.1
+Misskey.py==4.1.0
+pytz==2025.2
