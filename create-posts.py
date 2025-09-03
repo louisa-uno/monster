@@ -84,7 +84,7 @@ date_range = f"{monday.day:02}.{monday.month:02}.{monday.year} - {sunday.day:02}
 title = "Monster Energy Angebote diese Woche"
 discord_title = title
 discord_description = description + date_range
-misskey_description = title + "\n" + description + "<small>" + date_range + "</small>"
+misskey_description = "**" + title + "**" + "\n" + description + "<small>" + date_range + "</small>"
 
 try:
     # Send to Discord
