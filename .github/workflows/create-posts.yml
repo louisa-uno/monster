@@ -42,5 +42,5 @@ jobs:
               run: python create-posts.py
 
             - name: Run create-posts.py without secrets
-              if: (!(github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/force-post'))
+              if: (!(github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/force-post')))
               run: python create-posts.py
