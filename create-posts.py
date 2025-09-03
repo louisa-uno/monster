@@ -86,8 +86,8 @@ discord_title = title
 discord_description = description + date_range
 misskey_description = "**" + title + "**" + "\n" + description + "<small>" + date_range + "</small>"
 
+# Send to Discord
 try:
-    # Send to Discord
     discord_webhook = os.environ['DISCORD_WEBHOOK']
     webhook = DiscordWebhook(url=discord_webhook)
     embed = DiscordEmbed(title=discord_title, description=discord_description, color="55d600")
