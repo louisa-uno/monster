@@ -62,6 +62,9 @@ for city in cities:
             offers[retailer] = {"product_name": product_name, "price": price, "original_price": original_price}
 
 # Sort offers by price
+offers = dict(sorted(offers.items(), key=lambda item: item[1]['price']))
+
+# Prepare description
 description = ""
 for retailer in offers:
     offer = offers[retailer]
