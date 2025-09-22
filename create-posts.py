@@ -50,7 +50,7 @@ for city in cities:
         retailer = node.xpath('.//div[@class="mt-2"]/p[3]/text()')
         
         product_name = product_name[0].strip() if product_name else None
-        price = float(price[0].strip().replace("ab ", "").replace('€', '').replace(",", ".")) if price else None
+        price = float(price[0].strip().replace("ab ", "").replace('€', '').replace(",", ".")) if price and not price[0].strip() == "" else None
         original_price = float(original_price[0].strip().replace('€', '').replace(",", ".")) if original_price else None
         retailer = retailer[0].strip() if retailer else None
         
